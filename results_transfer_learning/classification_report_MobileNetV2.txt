@@ -1,0 +1,11 @@
+Model: MobileNetV2
+============================================================
+                 precision    recall  f1-score   support
+
+         mature     1.0000    1.0000    1.0000        15
+partiallymature     1.0000    1.0000    1.0000        15
+       unmature     1.0000    1.0000    1.0000        15
+
+       accuracy                         1.0000        45
+      macro avg     1.0000    1.0000    1.0000        45
+   weighted avg     1.0000    1.0000    1.0000        45
