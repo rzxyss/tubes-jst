@@ -3,7 +3,6 @@ Klasifikasi Buah Pepaya - Transfer Learning Model
 Menggunakan MobileNetV2 Pre-trained
 Tugas Akhir Jaringan Syaraf Tiruan
 
-Author: [Nama Anda]
 Dataset: Klasifikasi Pepaya (Mentah, Setengah Matang, Matang)
 """
 
@@ -25,9 +24,9 @@ import os
 
 class Config:
     # Path dataset
-    TRAIN_DIR = 'output/train'
-    VAL_DIR = 'output/val'
-    TEST_DIR = 'output/test'
+    TRAIN_DIR = 'dataset/train'
+    VAL_DIR = 'dataset/val'
+    TEST_DIR = 'dataset/test'
     
     # Hyperparameters
     IMG_HEIGHT = 224
@@ -39,7 +38,7 @@ class Config:
     # Model settings
     NUM_CLASSES = 3  # mentah, setengah_matang, matang
     CLASS_NAMES = ['mature', 'partiallymature', 'unmature']
-    BASE_MODEL = 'MobileNetV2'  # Options: 'MobileNetV2', 'EfficientNetB0', 'ResNet50'
+    BASE_MODEL = 'MobileNetV2'
     
     # Output
     MODEL_SAVE_PATH = f'models/pepaya_classifier_{BASE_MODEL}.h5'
@@ -114,25 +113,11 @@ def build_transfer_learning_model(base_model_name='MobileNetV2', trainable_layer
     Membuat model dengan transfer learning
     
     Args:
-        base_model_name: Nama pre-trained model ('MobileNetV2', 'EfficientNetB0', 'ResNet50')
+        base_model_name: Nama pre-trained model ('MobileNetV2')
         trainable_layers: Jumlah layer terakhir yang akan di-fine-tune (0 = freeze all)
     """
-    
-    # Pilih base model
     if base_model_name == 'MobileNetV2':
         base_model = MobileNetV2(
-            input_shape=(config.IMG_HEIGHT, config.IMG_WIDTH, 3),
-            include_top=False,
-            weights='imagenet'
-        )
-    elif base_model_name == 'EfficientNetB0':
-        base_model = EfficientNetB0(
-            input_shape=(config.IMG_HEIGHT, config.IMG_WIDTH, 3),
-            include_top=False,
-            weights='imagenet'
-        )
-    elif base_model_name == 'ResNet50':
-        base_model = ResNet50(
             input_shape=(config.IMG_HEIGHT, config.IMG_WIDTH, 3),
             include_top=False,
             weights='imagenet'
